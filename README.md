@@ -1,3 +1,5 @@
+School Project for Fuzzy Logic
+
 # Fuzzy Logic
 Fuzzy Logic (FL) is a method of reasoning that resembles human reasoning. The approach of FL imitates the way of decision making in humans that involves all intermediate possibilities between digital values YES and NO.
 

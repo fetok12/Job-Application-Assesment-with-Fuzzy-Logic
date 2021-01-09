@@ -1,4 +1,4 @@
-%Data Setleri (Ilk Sutun Yetkinlik Ikinci Sutun Kisilik Testidir)
+%Data Setleri (First Column is competence test and the second column is personality test)
 data_1 = [
     61      37.5;
     71      58.3;
@@ -21,28 +21,27 @@ data_1 = [
 ];
 
 
-%model fonksiyonu ile Tum Girisleri, Girislerin Uyelik Fonksiyonlarini ve
-%kurallari belirle
-[model_yetkinlik, model_kisilik, output_model, rules_model] = model();
 
-%fuzzification sureci
+[model_competence, model_personality, output_model, rules_model] = model();
+
+%fuzzification process
 % Data Set1 Fuzzification
- [outputfuzzificationYetkinlik, outputfuzzificationKislik] = fuzzification(model_yetkinlik,model_kisilik,data_1(:,1),data_1(:,2));
+ [outputfuzzificationCompetence, outputfuzzificationPersonality] = fuzzification(model_competence,model_personality,data_1(:,1),data_1(:,2));
 
 
 %inference
-[outputInference] = inference(outputfuzzificationYetkinlik, outputfuzzificationKislik, rules_model);
+[outputInference] = inference(outputfuzzificationCompetence, outputfuzzificationPersonality, rules_model);
 
 %defuzzification
 [outputDefuzzification]= deffuzification(outputInference, output_model);
 
 %result processing
-Ret = outputDefuzzification < 60; % Sonuc 60 tan kucukse Aplikasyon Ret
-Kabul = outputDefuzzification > 60; %Sonuc 60 tan buyukse Aplikasyon Kabul
+Rejected = outputDefuzzification < 60; % Sonuc 60 tan kucukse Aplikasyon Ret
+Accepted = outputDefuzzification > 60; %Sonuc 60 tan buyukse Aplikasyon Kabul
 
 
-kabullistesi = find(Kabul==1);
-retListesi = find(Ret==1);
+kabullistesi = find(Accepted==1);
+retListesi = find(Rejected==1);
 disp('Is Basvurusu Kabul Edilenler ' );
 disp(kabullistesi');
 disp('Is Basvurusu Reddedilenler ' );
@@ -50,9 +49,9 @@ disp(retListesi');
 
 
 disp('Yetkinlik BULANIKLASTIRMA SONUCU' );
-disp(outputfuzzificationYetkinlik);
+disp(outputfuzzificationCompetence);
 disp('KISILIK BULANIKLASTIRMA SONUCU' );
-disp(outputfuzzificationKislik);
+disp(outputfuzzificationPersonality);
 disp('CIKARIM SONUCU')
 disp(outputInference);
 display('DURULASTIRMA SONUCU');
